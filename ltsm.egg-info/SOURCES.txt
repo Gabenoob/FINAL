@@ -1,0 +1,6 @@
+README.md
+setup.py
+ltsm.egg-info/PKG-INFO
+ltsm.egg-info/SOURCES.txt
+ltsm.egg-info/dependency_links.txt
+ltsm.egg-info/top_level.txt
