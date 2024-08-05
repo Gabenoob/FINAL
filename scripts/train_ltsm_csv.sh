@@ -24,7 +24,7 @@ downsample_rate=20
 freeze=0
 OUTPUT_PATH="output/ltsm_lr${lr}_loraFalse_down${downsample_rate}_freeze${freeze}_e${epoch}_pred${pred_len}/"
 lr=1e-3
-model_path="../model/gpt2-medium"
+model_path="/data/coding/gpt2medium"
 
 for pred_len in 96 192 336 720  
 do
