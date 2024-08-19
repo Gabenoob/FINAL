@@ -24,15 +24,15 @@ epoch=500
 downsample_rate=20
 freeze=0
 lr=1e-3
+model_path="/home/FINAL/gpt2-medium"
 
 
 for pred_len in 96
 do
 
-    CUDA_VISIBLE_DEVICES=0,1 python3 main_ltsm.py \
+    CUDA_VISIBLE_DEVICES=0 python3 main_ltsm.py \
     --model LTSM \
-    --model_name_or_path gpt2-medium \
-    --local_pretrain  LSC2204/LTSM-bundle \
+    --model_name_or_path ${model_path} \
     --train_epochs ${epoch} \
     --batch_size 800 \
     --pred_len ${pred_len} \
