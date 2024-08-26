@@ -111,7 +111,8 @@ def prompt_save(prompt_buf, output_path):
             prompt_train_fname = os.path.join(output_path, "train", data_name + "_" + index + "_prompt.pth.tar")
             prompt_train = col
             prompt_train.columns = [index]
-            prompt_train = prompt_train.T
+            prompt_train=prompt_train.to_frame()
+            # prompt_train = prompt_train.T
             torch.save(prompt_train, prompt_train_fname)
             print("Export", prompt_train_fname, prompt_train.shape)
 
@@ -119,7 +120,8 @@ def prompt_save(prompt_buf, output_path):
             prompt_val_fname = os.path.join(output_path, "val", data_name + "_" + index + "_prompt.pth.tar")
             prompt_val = col
             prompt_val.columns = [index]
-            prompt_val = prompt_val.T
+            prompt_val=prompt_val.to_frame()
+            # prompt_val = prompt_val.T
             torch.save(prompt_val, prompt_val_fname)
             print("Export", prompt_val_fname, prompt_val.shape)
 
@@ -127,7 +129,8 @@ def prompt_save(prompt_buf, output_path):
             prompt_test_fname = os.path.join(output_path, "test", data_name + "_" + index + "_prompt.pth.tar")
             prompt_test = col
             prompt_test.columns = [index]
-            prompt_test = prompt_test.T
+            prompt_test=prompt_test.to_frame()
+            # prompt_test = prompt_test.T
             torch.save(prompt_test, prompt_test_fname)
             print("Export", prompt_test_fname, prompt_test.shape)
 
@@ -147,6 +150,8 @@ def data_import(path, format="feather"):
         data_dir = data_name[0:data_name.rfind("/")]
         if "date" in data.columns:
             data = data.drop("date", axis=1)
+        if "V1" in data.columns:
+            data = data.drop("V1", axis=1)
         # print(data)
         # data = data.value
 
@@ -162,23 +167,24 @@ def create_data_dir(dir_name):
 
 if __name__ == "__main__":
 
-    root_path = "../../datasets/"
+    root_path = "./datasets/"
     output_path = "./prompt_bank/stat-prompt/prompt_data_split/"
 
 
     dataset_name = [
-        "electricity",
-        "ETT-small",
-        "exchange_rate",
-        "illness",
-        "traffic",
-        "weather",
+        # "electricity/electricity.csv",
+        "m4/Daily-test.csv",
+        # "ETT-small/ETTh1.csv",
+        # "exchange_rate",
+        # "illness",
+        # "traffic",
+        # "weather",
     ]
 
     dataset_fullname = [os.path.join(root_path, name) for name in dataset_name]
     data_path_buf = []
     for dataset_dir in dataset_fullname:
-        data_path_buf.extend(dataset_dir)
+        data_path_buf.append(dataset_dir)
 
     print(data_path_buf)
     create_data_dir(output_path)
